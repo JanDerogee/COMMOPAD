@@ -13,3 +13,4 @@ The device autodetects if it is connected via USB or to the joystick port of you
 
 All info about how to use it etc. is in the usermanual.
 Feel free to visit my website:
+https://janderogee.com/projects/COMMO_PAD/COMMO_PAD.htm
