@@ -62,7 +62,7 @@
 const unsigned int POT_OFFSET = 3800;   /*The CBM paddle ADC uses a deadzone of 256us to clear the measurement capacitor*/
 const unsigned int POT_SCALE = 162;     /*The factor (x10) between the timing of Arduino Timer-1 and the CBM ADC timer*/
 #define JOYSTICKMODESENSITIVITY   50   /*the number of pixels the sylus needs to move in order to be detected as a joystick thresshold*/
-#define AUTOFIREDELAY             100
+#define AUTOFIREDELAY             40
 const int min_x = 240;                  /*value used for paddle (koalapad) mode, to match the size of the screen to the workable size of the CBM screen*/
 const int max_x = 751;                  /*                                                                                                             */
 const int min_y = 240;                  /*                                                                                                             */
@@ -378,10 +378,6 @@ void loop(void)
   
       case C64_JOYSTICK:
       {    
-        /*button-1 and 3 are mapped to the fire button in this mode*/
-        if((digitalRead(BUTTON1) == LOW) || (digitalRead(BUTTON3) == LOW))  { digitalWrite(JOY_FIRE, HIGH);  }
-        else                                                                { digitalWrite(JOY_FIRE, LOW); }
-  
         /*button-2 (the center button) is mapped to function as an auto-fire button*/
         if(digitalRead(BUTTON2) == LOW)
         {
@@ -399,7 +395,9 @@ void loop(void)
         }
         else
         {
-          digitalWrite(JOY_FIRE, LOW);
+          /*button-1 and 3 are mapped to the fire button in this mode*/
+          if((digitalRead(BUTTON1) == LOW) || (digitalRead(BUTTON3) == LOW))  { digitalWrite(JOY_FIRE, HIGH);  }
+          else                                                                { digitalWrite(JOY_FIRE, LOW); }    
         }
   
   
